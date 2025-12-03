@@ -12,7 +12,7 @@ public class AnimalDaoImpl extends AbstractDao implements AnimalDao {
 
     @Override
     public Animal save(Animal animal) {
-        return null;
+        return saveEntity(animal);
     }
 
     @Override

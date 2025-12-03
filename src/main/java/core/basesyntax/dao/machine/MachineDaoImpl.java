@@ -12,7 +12,7 @@ public class MachineDaoImpl extends AbstractDao implements MachineDao {
 
     @Override
     public Machine save(Machine machine) {
-        return null;
+        return saveEntity(machine);
     }
 
     @Override

@@ -12,7 +12,7 @@ public class FigureDaoImpl<T extends Figure> extends AbstractDao implements Figu
 
     @Override
     public T save(T figure) {
-        return null;
+        return saveEntity(figure);
     }
 
     @Override
