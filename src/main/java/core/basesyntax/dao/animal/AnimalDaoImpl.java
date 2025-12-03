@@ -3,6 +3,7 @@ package core.basesyntax.dao.animal;
 import core.basesyntax.dao.AbstractDao;
 import core.basesyntax.model.zoo.Animal;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Root;
 import java.util.List;
 import org.hibernate.SessionFactory;
@@ -22,7 +23,8 @@ public class AnimalDaoImpl extends AbstractDao implements AnimalDao {
         return findEntities(builder -> {
             CriteriaQuery<Animal> query = builder.createQuery(Animal.class);
             Root<Animal> root = query.from(Animal.class);
-            query.where(builder.like(root.get("name"), character + "%"));
+            Expression<String> name = builder.lower(root.get("name"));
+            query.where(builder.like(name, Character.toLowerCase(character) + "%"));
             return query;
         });
     }
