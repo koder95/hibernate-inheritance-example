@@ -2,6 +2,8 @@ package core.basesyntax.dao.machine;
 
 import core.basesyntax.dao.AbstractDao;
 import core.basesyntax.model.machine.Machine;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import java.util.List;
 import org.hibernate.SessionFactory;
 
@@ -17,6 +19,11 @@ public class MachineDaoImpl extends AbstractDao implements MachineDao {
 
     @Override
     public List<Machine> findByAgeOlderThan(int age) {
-        return null;
+        return findEntities(builder -> {
+            CriteriaQuery<Machine> query = builder.createQuery(Machine.class);
+            Root<Machine> root = query.from(Machine.class);
+            query.where(builder.greaterThan(root.get("age"), age));
+            return query;
+        });
     }
 }
