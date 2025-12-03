@@ -3,14 +3,9 @@ package core.basesyntax.dao.machine;
 import core.basesyntax.dao.AbstractDao;
 import core.basesyntax.model.machine.Machine;
 import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Root;
-
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-
-import jakarta.persistence.criteria.Selection;
 import org.hibernate.SessionFactory;
 
 public class MachineDaoImpl extends AbstractDao implements MachineDao {
