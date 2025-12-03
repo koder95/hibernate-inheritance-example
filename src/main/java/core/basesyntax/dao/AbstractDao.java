@@ -1,5 +1,9 @@
 package core.basesyntax.dao;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import java.util.List;
+import java.util.function.Function;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,5 +35,14 @@ public abstract class AbstractDao {
             }
         }
         return entity;
+    }
+
+    protected <T> List<T> findEntities(Function<CriteriaBuilder, CriteriaQuery<T>> queryFactory) {
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            return session.createQuery(queryFactory.apply(builder)).getResultList();
+        } catch (Exception e) {
+            throw new HibernateException("Entity not found", e);
+        }
     }
 }
